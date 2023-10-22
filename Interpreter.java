@@ -24,8 +24,14 @@ public class Interpreter {
 
             while (scanner.hasNextLine()) {
                 String nextLine = scanner.nextLine();
-                // Leading whitespace is removed.
-                fileStringArr.add(nextLine.stripLeading());
+                // Leading whitespace, blank lines and comments are removed.
+                int commendIdx = nextLine.indexOf("//");
+                if (commendIdx != -1) {
+                    nextLine = nextLine.substring(0, commendIdx);
+                }
+                if (!nextLine.isEmpty()) {
+                    fileStringArr.add(nextLine.stripLeading());
+                }
             }
 
             scanner.close();
